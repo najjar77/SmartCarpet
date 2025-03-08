@@ -1,16 +1,19 @@
 # Load libraries
 from machine import Pin
-from time import sleep
-
-# Initialization of the PIR module
+import time
+ 
 pir = Pin(22, Pin.IN, Pin.PULL_DOWN)
-
-
-# Repetition (endless loop)
+n = 0
+ 
+print('Starting up the PIR Module')
+time.sleep(1)
+print('Ready')
+ 
 while True:
-    # Wait 1 second
-    sleep(1)
-    # Read PIR sensor state
-    pir_value = pir.value()
-    # Output value
-    print(pir_value)
+    detected = pir.value() 
+    if detected == 1:
+        n = n+1
+        print('Motion Detected ',n)
+        time.sleep(6)
+    time.sleep(1) #is activated for 7 seconds
+    detected = 0
